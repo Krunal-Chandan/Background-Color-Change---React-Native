@@ -1,118 +1,106 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import React, { useState } from 'react';
 
-import React from 'react';
-import type {PropsWithChildren} from 'react';
 import {
-  SafeAreaView,
-  ScrollView,
   StatusBar,
   StyleSheet,
   Text,
-  useColorScheme,
+  TouchableOpacity,
   View,
 } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
-
 function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+  const [randomBackground1, setRandomBackground1] = useState("#ffffff")
+  const [randomBackground2, setRandomBackground2] = useState("#ffffff")
+  const [randomBackground3, setRandomBackground3] = useState("#ffffff")
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
+  const generateColor1 = () => {
+    const hexRange = '0123456789ABCDEF'
+    let color = "#"
 
+    for(let i = 0; i < 6; i++){
+      color += hexRange[Math.floor(Math.random() * 16)]
+    }
+    setRandomBackground1(color)
+  }
+  const generateColor2 = () => {
+    const hexRange = '0123456789ABCDEF'
+    let color = "#"
+
+    for(let i = 0; i < 6; i++){
+      color += hexRange[Math.floor(Math.random() * 16)]
+    }
+    setRandomBackground2(color)
+  }
+  const generateColor3 = () => {
+    const hexRange = '0123456789ABCDEF'
+    let color = "#"
+
+    for(let i = 0; i < 6; i++){
+      color += hexRange[Math.floor(Math.random() * 16)]
+    }
+    setRandomBackground3(color)
+  }
+   
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
+    <>
+    
+    <View style={[styles.container, {backgroundColor: randomBackground1}]}>
+      <TouchableOpacity onPress={generateColor1}>
+        <View style={styles.actionBtn}>
+          <Text style={styles.actionBtnTxt1}>Click Here to Change The Background Color</Text>
+          <Text style={styles.actionBtnTxt2}>Hex Code : {randomBackground1}</Text>
         </View>
-      </ScrollView>
-    </SafeAreaView>
+      </TouchableOpacity>
+    </View>
+
+    <View style={[styles.container, {backgroundColor: randomBackground2}]}>
+      <TouchableOpacity onPress={generateColor2}>
+        <View style={styles.actionBtn}>
+          <Text style={styles.actionBtnTxt1}>Click Here to Change The Background Color</Text>
+          <Text style={styles.actionBtnTxt2}>Hex Code : {randomBackground2}</Text>
+        </View>
+      </TouchableOpacity>
+    </View>
+
+    <View style={[styles.container, {backgroundColor: randomBackground3}]}>
+      <TouchableOpacity onPress={generateColor3}>
+        <View style={styles.actionBtn}>
+          <Text style={styles.actionBtnTxt1}>Click Here to Change The Background Color</Text>
+          <Text style={styles.actionBtnTxt2}>Hex Code : {randomBackground3}</Text>
+        </View>
+      </TouchableOpacity>
+    </View>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  container:{
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
+  actionBtn:{
+    backgroundColor: "#000000",
+    borderRadius: 10,
+    paddingVertical: 20,
+    paddingHorizontal: 20,
   },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
+  actionBtnTxt2:{
+    color: '#FFFFFF',
+    fontWeight: '900',
+    fontSize: 32,
   },
-  highlight: {
-    fontWeight: '700',
+  actionBtnTxt1:{
+    color: '#FFFFFF',
+    fontWeight: '900',
+    fontSize: 12,
   },
+  colorHex:{
+    fontSize: 25,
+    paddingLeft: 65,
+    color: '#ffffff'
+  }
 });
 
 export default App;
